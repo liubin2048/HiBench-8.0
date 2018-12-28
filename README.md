@@ -2,7 +2,7 @@
 ## The bigdata micro benchmark suite ##
 
 
-* Current version: 6.0
+* Current version: 7.0-liubin
 * Homepage: https://github.com/intel-hadoop/HiBench
 * Contents:
   1. Overview
@@ -134,12 +134,12 @@ There are totally 19 workloads in HiBench. The workloads are divided into 6 cate
     
 ### Supported Hadoop/Spark/Flink/Storm/Gearpump releases: ###
 
-  - Hadoop: Apache Hadoop 2.x, CDH5, HDP
-  - Spark: Spark 1.6.x, Spark 2.0.x, Spark 2.1.x, Spark 2.2.x
-  - Flink: 1.0.3
+  - Hadoop: Apache Hadoop 2.x(2.7.6), HDP
+  - Spark: Spark 1.6.x, Spark 2.0.x, Spark 2.1.x, Spark 2.2.x, Spark 2.3.x, Spark 2.4.0
+  - Flink: 1.7.1
   - Storm: 1.0.1
   - Gearpump: 0.8.1
-  - Kafka: 0.8.2.2
+  - Kafka: 0.11.0.3
 
 ---
 
