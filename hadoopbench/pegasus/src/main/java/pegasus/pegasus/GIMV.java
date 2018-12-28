@@ -19,7 +19,7 @@ File: GIMV.java
 Version: 2.0
 ***********************************************************************/
 
-package pegasus.pegasus;
+package pegasus;
 
 import java.io.*;
 import java.util.*;
@@ -29,7 +29,6 @@ import org.apache.hadoop.fs.*;
 import org.apache.hadoop.io.*;
 import org.apache.hadoop.mapred.*;
 import org.apache.hadoop.util.*;
-import pegasus.hadi.BitShuffleCoder;
 
 class VectorElem<T>
 {

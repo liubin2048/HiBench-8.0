@@ -19,7 +19,7 @@ File: ConCmptBlock.java
 Version: 2.0
 ***********************************************************************/
 
-package pegasus.con_cmpth;
+package pegasus;
 
 import java.io.*;
 import java.util.*;
@@ -29,8 +29,6 @@ import org.apache.hadoop.fs.*;
 import org.apache.hadoop.io.*;
 import org.apache.hadoop.mapred.*;
 import org.apache.hadoop.util.*;
-import pegasus.ConCmpt;
-import pegasus.ResultInfo;
 
 public class ConCmptBlock extends Configured implements Tool 
 {

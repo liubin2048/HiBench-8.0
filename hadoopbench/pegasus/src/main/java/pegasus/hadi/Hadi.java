@@ -19,7 +19,7 @@ File: Hadi.java
 Version: 2.0
 ***********************************************************************/
 
-package pegasus.hadi;
+package pegasus;
 
 import java.io.*;
 import java.util.*;
