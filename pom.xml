@@ -56,26 +56,18 @@
         <log4j.version>1.2.17</log4j.version>
         <scopt.version>3.7.0</scopt.version>
         <fastutil.version>8.2.2</fastutil.version>
+        <jackson.version>2.4.2</jackson.version>
 
         <mahout.version>0.9</mahout.version>
         <uncommons-maths.version>1.2.2a</uncommons-maths.version>
 
-        <scala.version>2.11.8</scala.version>
-        <scala.binary.version>2.11.8</scala.binary.version>
-        <scalatest.version>3.0.5</scalatest.version>
-        <scalacheck.version>1.14.0</scalacheck.version>
 
         <hadoop.mr2.version>2.7.6</hadoop.mr2.version>
         <hadoop.mr1.version>1.2.1</hadoop.mr1.version>
 
-        <sparkVersion>2.4.0</sparkVersion>
-        <sparkBin.version>2.4</sparkBin.version>
-
-        <flinkVersion>1.7.0</flinkVersion>
-        <jackson.version>2.4.2</jackson.version>
+        <flink.version>1.7.0</flink.version>
 
         <kafkaClient.version>0.11.0.3</kafkaClient.version>
-        <!--<kafkaClient.version>0.8.2.2</kafkaClient.version>-->
 
         <gearpumpVersion>0.8.1</gearpumpVersion>
 

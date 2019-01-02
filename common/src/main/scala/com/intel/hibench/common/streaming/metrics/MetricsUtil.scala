@@ -19,6 +19,7 @@ package com.intel.hibench.common.streaming.metrics
 import com.intel.hibench.common.streaming.Platform
 import kafka.admin.AdminUtils
 import kafka.utils.ZkUtils
+import org.apache.kafka.common.security.JaasUtils
 
 object MetricsUtil {
 
@@ -33,8 +34,8 @@ object MetricsUtil {
   }
 
   def createTopic(zkConnect: String, topic: String, partitions: Int): Unit = {
-    //  val zkClient = new ZkClient(zkConnect, 6000, 6000, SerializableSerializer)
-    val zkUtils = ZkUtils.apply(zkConnect, 6000, 6000, false)
+//      val zkClient = new ZkClient(zkConnect, 6000, 6000, SerializableSerializer)
+    val zkUtils = ZkUtils.apply(zkConnect, 6000, 6000, JaasUtils.isZkSecurityEnabled())
     try {
       AdminUtils.createTopic(zkUtils, topic, partitions, 1)
       while (!AdminUtils.topicExists(zkUtils, topic)) {
