@@ -72,8 +72,8 @@ object RunBench {
     val probability = conf.getProperty(StreamBenchConfig.SAMPLE_PROBABILITY).toDouble
     // init SparkBenchConfig, it will be passed into every test case
     val config = SparkBenchConfig(master, benchName, batchInterval, receiverNumber, copies,
-      enableWAL, checkPointPath, directMode, zkHost, offsetReset, consumerGroup, topic, reporterTopic,
-      brokerList, debugMode, coreNumber, probability, windowDuration, windowSlideStep)
+      enableWAL, checkPointPath, directMode, zkHost, consumerGroup, topic, reporterTopic,
+      brokerList, offsetReset, debugMode, coreNumber, probability, windowDuration, windowSlideStep)
 
     run(config)
   }

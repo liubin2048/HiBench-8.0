@@ -37,8 +37,7 @@ case class SparkBenchConfig(
                              sourceTopic: String,
                              reporterTopic: String,
                              brokerList: String,
-                             offsetReset: String = "latest",
-
+                             offsetReset: String,
 
                              // Hibench
                              debugMode: Boolean,
