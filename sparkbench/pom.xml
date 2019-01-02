@@ -20,6 +20,19 @@
     <module>assembly</module>
   </modules>
 
+  <dependencies>
+    <dependency>
+      <groupId>org.scala-lang</groupId>
+      <artifactId>scala-library</artifactId>
+      <version>2.11.8</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.kafka</groupId>
+      <artifactId>kafka-clients</artifactId>
+      <version>0.11.0.3</version>
+    </dependency>
+  </dependencies>
+
   <build>
     <plugins>
       <plugin>
