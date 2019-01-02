@@ -177,12 +177,12 @@
             </modules>
         </profile>
 
-        <profile>
-            <id>stormbench</id>
-            <modules>
-                <module>stormbench</module>
-            </modules>
-        </profile>
+        <!--<profile>-->
+            <!--<id>stormbench</id>-->
+            <!--<modules>-->
+                <!--<module>stormbench</module>-->
+            <!--</modules>-->
+        <!--</profile>-->
 
         <profile>
             <id>defaultbench</id>
@@ -191,7 +191,7 @@
                 <module>flinkbench</module>
                 <module>gearpumpbench</module>
                 <module>hadoopbench</module>
-                <module>stormbench</module>
+                <!--<module>stormbench</module>-->
             </modules>
             <activation>
                 <activeByDefault>true</activeByDefault>
