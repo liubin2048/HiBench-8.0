@@ -57,7 +57,7 @@ case class SparkBenchConfig(
     "value.deserializer" -> classOf[StringDeserializer],
     "group.id" -> consumerGroup,
     "bootstrap.servers" -> brokerList,
-    "enable.auto.commit" -> (false: java.lang.Boolean),
+    "enable.auto.commit" -> (true: java.lang.Boolean),
     "auto.offset.reset" -> offsetReset
   )
 

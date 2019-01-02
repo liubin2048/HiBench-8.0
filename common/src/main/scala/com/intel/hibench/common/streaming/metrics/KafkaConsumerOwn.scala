@@ -40,7 +40,7 @@ class KafkaConsumerOwn(bootstrapServers: String, topic: String, partition: Int) 
   props.put("value.deserializer", classOf[StringDeserializer])
   props.put("group.id", CLIENT_ID)
   props.put("bootstrap.servers", bootstrapServers)
-  props.put("enable.auto.commit", (false: java.lang.Boolean))
+  props.put("enable.auto.commit", (true: java.lang.Boolean))
   props.put("auto.offset.reset", "latest")
 
   private val consumer = createConsumer
