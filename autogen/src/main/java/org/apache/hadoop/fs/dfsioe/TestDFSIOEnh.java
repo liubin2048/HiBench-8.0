@@ -39,6 +39,8 @@ import org.apache.hadoop.conf.*;
 import org.apache.hadoop.fs.*;
 import org.apache.hadoop.fs.dfsioe.Analyzer._Mapper;
 import org.apache.hadoop.fs.dfsioe.Analyzer._Reducer;
+import org.apache.hadoop.io.compress.CompressionCodec;
+import org.apache.hadoop.io.compress.CompressionCodecFactory;
 
 /**
  * Enhanced Distributed i/o benchmark.
@@ -841,10 +843,16 @@ public class TestDFSIOEnh extends Configured implements Tool {
 								         boolean tputReportEach, boolean tputReportTotal) throws IOException {
 		 long t1 = System.currentTimeMillis();
 		 Path reduceFile;
-		 if (testType == TEST_TYPE_WRITE)
-			 reduceFile = new Path(DfsioeConfig.getInstance().getWriteDir(fsConfig), "part-00000");
+
+//         if (testType == TEST_TYPE_WRITE)
+//             reduceFile = new Path(DfsioeConfig.getInstance().getWriteDir(fsConfig), "part-00000");
+//         else
+//             reduceFile = new Path(DfsioeConfig.getInstance().getReadDir(fsConfig), "part-00000");
+
+         if (testType == TEST_TYPE_WRITE)
+			 reduceFile = new Path(DfsioeConfig.getInstance().getWriteDir(fsConfig), "part-00000.snappy");
 		 else
-			 reduceFile = new Path(DfsioeConfig.getInstance().getReadDir(fsConfig), "part-00000");		
+			 reduceFile = new Path(DfsioeConfig.getInstance().getReadDir(fsConfig), "part-00000.snappy");		
 		
 		 int maxslot = (int)(execTime/plotInterval)+1;
 		 int[] concurrency = new int[maxslot+1];
@@ -862,11 +870,15 @@ public class TestDFSIOEnh extends Configured implements Tool {
 		 float sqrate = 0;
 		 float loggingTime = 0;
 		 try {
-			 rd = new BufferedReader(new InputStreamReader(new DataInputStream(fs.open(reduceFile))));
+//             rd = new BufferedReader(new InputStreamReader(new DataInputStream(fs.open(reduceFile))));
+
+             CompressionCodecFactory factory = new CompressionCodecFactory(fsConfig);
+			 CompressionCodec codec = factory.getCodec(reduceFile);  
+			 rd = new BufferedReader(new InputStreamReader(codec.createInputStream(fs.open(reduceFile))));
 			 String s = null;
 			 while ((s = rd.readLine()) != null) {
 				 StringTokenizer tokens = new StringTokenizer(s, " \t\n\r\f%");
-				 String lable = tokens.nextToken(); 
+				 String lable = tokens.nextToken();
 				 if (lable.endsWith(":tasks")) {
 					 tasks = Long.parseLong(tokens.nextToken());
 				 } else if (lable.endsWith(":size")) {
@@ -879,8 +891,11 @@ public class TestDFSIOEnh extends Configured implements Tool {
 					 sqrate = Float.parseFloat(tokens.nextToken());
 				 } else if (lable.endsWith(":io_start_end")) {
 					 String[] t = tokens.nextToken().split(";");
-					 int start = (int)((Long.parseLong(t[0])-tStart)/plotInterval) + 1;
-					 int end = (int)((Long.parseLong(t[1])-tStart)/plotInterval) - 1;
+//                     int start = (int)((Long.parseLong(t[0])-tStart)/plotInterval) + 1;
+//                     int end = (int)((Long.parseLong(t[1])-tStart)/plotInterval) - 1;
+
+					 int start = (int)((Long.parseLong(t[0].trim())-tStart)/plotInterval) + 1;
+					 int end = (int)((Long.parseLong(t[1].trim())-tStart)/plotInterval) - 1;
 					 if(start < 0)
 						 start = 0;
 					 for (int i=start; i<=end; i++){
@@ -954,7 +969,12 @@ public class TestDFSIOEnh extends Configured implements Tool {
 			 fs.delete(DfsioeConfig.getInstance().getReportTmp(fsConfig), true);
 			 FileUtil.copyMerge(fs, DfsioeConfig.getInstance().getReportDir(fsConfig), fs, DfsioeConfig.getInstance().getReportTmp(fsConfig), false, fsConfig, null);
 			 LOG.info("remote report file " + DfsioeConfig.getInstance().getReportTmp(fsConfig) + " merged.");
-			 BufferedReader lines = new BufferedReader(new InputStreamReader(new DataInputStream(fs.open(DfsioeConfig.getInstance().getReportTmp(fsConfig)))));
+
+//             BufferedReader lines = new BufferedReader(new InputStreamReader(new DataInputStream(fs.open(DfsioeConfig.getInstance().getReportTmp(fsConfig)))));
+
+			 CompressionCodecFactory factory = new CompressionCodecFactory(fsConfig); 
+			 CompressionCodec codec = factory.getCodec(reduceFile);  
+			 BufferedReader lines = new BufferedReader(new InputStreamReader(codec.createInputStream(fs.open(DfsioeConfig.getInstance().getReportTmp(fsConfig)))));
 			 String line = null;
 			 while((line = lines.readLine()) != null) {
 				 StringTokenizer tokens = new StringTokenizer(line, " \t\n\r\f%");
@@ -1031,10 +1051,15 @@ public class TestDFSIOEnh extends Configured implements Tool {
 		 float sqrate = 0;
 	
 		 Path reduceFile;
-		 if (testType == TEST_TYPE_WRITE)
-			 reduceFile = new Path(DfsioeConfig.getInstance().getWriteDir(fsConfig), "part-00000");
+//         if (testType == TEST_TYPE_WRITE)
+//             reduceFile = new Path(DfsioeConfig.getInstance().getWriteDir(fsConfig), "part-00000");
+//         else
+//             reduceFile = new Path(DfsioeConfig.getInstance().getReadDir(fsConfig), "part-00000");
+
+         if (testType == TEST_TYPE_WRITE)
+			 reduceFile = new Path(DfsioeConfig.getInstance().getWriteDir(fsConfig), "part-00000.snappy");
 		 else
-			 reduceFile = new Path(DfsioeConfig.getInstance().getReadDir(fsConfig), "part-00000");
+			 reduceFile = new Path(DfsioeConfig.getInstance().getReadDir(fsConfig), "part-00000.snappy");
 	    
 	
 		 //long time = 0;

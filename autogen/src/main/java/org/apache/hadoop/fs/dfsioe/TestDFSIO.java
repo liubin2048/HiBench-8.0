@@ -378,10 +378,16 @@ public class TestDFSIO extends Configured implements Tool {
                                      String resFileName
                                      ) throws IOException {
     Path reduceFile;
+
+//    if (testType == TEST_TYPE_WRITE)
+//      reduceFile = new Path(WRITE_DIR, "part-00000");
+//    else
+//      reduceFile = new Path(READ_DIR, "part-00000");
+
     if (testType == TEST_TYPE_WRITE)
-      reduceFile = new Path(WRITE_DIR, "part-00000");
+      reduceFile = new Path(WRITE_DIR, "part-00000.snappy");
     else
-      reduceFile = new Path(READ_DIR, "part-00000");
+      reduceFile = new Path(READ_DIR, "part-00000.snappy");
     DataInputStream in;
     in = new DataInputStream(fs.open(reduceFile));
   
