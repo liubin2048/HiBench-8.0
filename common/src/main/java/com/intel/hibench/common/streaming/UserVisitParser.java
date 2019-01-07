@@ -25,9 +25,15 @@ public class UserVisitParser {
 
   public static UserVisit parse(String line) {
     String[] elements = line.split("[\\s,]+");
-    String ip = elements[1];
-    String sessionId = elements[2];
-    String browser = elements[5];
+    String ip = "null";
+    String sessionId = "null";
+    String browser = "null";
+
+    if(elements.length>6){
+      ip = elements[1];
+      sessionId = elements[2];
+      browser = elements[5];
+    }
     return new UserVisit(ip, sessionId, browser);
   }
 }
