@@ -23,17 +23,21 @@ package com.intel.hibench.common.streaming;
 // 0 	34.57.45.175,nbizrgdziebtsaecsecujfjcqtvnpcnxxwiopmddorcxnlijdizgoi,2001-06-29,0.14202267,Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1),DOM,DOM-ES,Gaborone's,7
 public class UserVisitParser {
 
-  public static UserVisit parse(String line) {
-    String[] elements = line.split("[\\s,]+");
-    String ip = "null";
-    String sessionId = "null";
-    String browser = "null";
+    public static UserVisit parse(String line) {
+        String[] elements = line.split("[\\s,]+");
+        String ip = "null";
+        String sessionId = "null";
+        String browser = "null";
 
-    if(elements.length>6){
-      ip = elements[1];
-      sessionId = elements[2];
-      browser = elements[5];
+        try {
+            if (elements.length > 6) {
+                ip = elements[1];
+                sessionId = elements[2];
+                browser = elements[5];
+            }
+        }catch (Exception e){
+        }
+
+        return new UserVisit(ip, sessionId, browser);
     }
-    return new UserVisit(ip, sessionId, browser);
-  }
 }
