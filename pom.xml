@@ -65,7 +65,7 @@
         <hadoop.mr2.version>2.7.6</hadoop.mr2.version>
         <hadoop.mr1.version>1.2.1</hadoop.mr1.version>
 
-        <flink.version>1.7.0</flink.version>
+        <flink.version>1.7.1</flink.version>
 
         <kafkaClient.version>0.11.0.3</kafkaClient.version>
 
