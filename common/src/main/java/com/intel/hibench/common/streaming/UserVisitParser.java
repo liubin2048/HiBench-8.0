@@ -29,11 +29,14 @@ public class UserVisitParser {
         String sessionId = "null";
         String browser = "null";
 
-        if (elements.length > 6) {
+        try{
             ip = elements[1];
             sessionId = elements[2];
             browser = elements[5];
+        }catch(Exception e){
+//            System.out.println(e.getMessage());
         }
+
         return new UserVisit(ip, sessionId, browser);
     }
 }
