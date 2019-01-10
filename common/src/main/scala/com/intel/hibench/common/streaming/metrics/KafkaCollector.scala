@@ -22,14 +22,17 @@ import java.util.concurrent.{Executors, Future, TimeUnit}
 import java.util.{Date, Properties}
 
 import com.codahale.metrics.{Histogram, UniformReservoir}
+import kafka.utils.ZkUtils
+import org.apache.kafka.clients.admin.TopicDescription
 import org.apache.kafka.clients.consumer.KafkaConsumer
 import org.apache.kafka.common.PartitionInfo
+import org.apache.kafka.common.security.JaasUtils
 import org.apache.kafka.common.serialization.StringDeserializer
 
 import scala.collection.mutable.ArrayBuffer
 
 
-class KafkaCollector(bootstrapServers: String, metricsTopic: String,
+class KafkaCollector(zkConnect: String, bootstrapServers: String, metricsTopic: String,
                      outputDir: String, sampleNumber: Int, desiredThreadNum: Int) extends LatencyCollector {
 
   private val histogram = new Histogram(new UniformReservoir(sampleNumber))
@@ -37,7 +40,7 @@ class KafkaCollector(bootstrapServers: String, metricsTopic: String,
   private val fetchResults = ArrayBuffer.empty[Future[FetchJobResult]]
 
   def start(): Unit = {
-    val partitions = getPartitions(metricsTopic)
+    val partitions = getPartitions(metricsTopic, zkConnect)
 
     println("Starting MetricsReader for kafka topic: " + metricsTopic)
 
@@ -60,39 +63,38 @@ class KafkaCollector(bootstrapServers: String, metricsTopic: String,
     report(finalResults.minTime, finalResults.maxTime, finalResults.count)
   }
 
-  //  private def getPartitions(topic: String, zkConnect: String): Seq[Int] = {
-  //    //    val zkClient = new ZkClient(zkConnect, 6000, 6000, SerializableSerializer)
-  //    val zkUtils = ZkUtils.apply(zkConnect, 6000, 6000, false)
-  //    try {
-  //      zkUtils.getPartitionsForTopics(Seq(topic)).flatMap(_._2).toSeq
-  //    } finally {
-  //      zkUtils.close()
-  //    }
-  //  }
-
-  private val CLIENT_ID = "metrics_reader"
-
-  private val props = new Properties()
-  props.put("key.deserializer", classOf[StringDeserializer])
-  props.put("value.deserializer", classOf[StringDeserializer])
-  props.put("group.id", CLIENT_ID)
-  props.put("bootstrap.servers", bootstrapServers)
-  props.put("enable.auto.commit", (true: java.lang.Boolean))
-  props.put("auto.offset.reset", "latest")
-
-  private def getPartitions(topic: String): Seq[Int] = {
-    import scala.collection.JavaConversions._
-    val consumer = new KafkaConsumer[String, String](props);
-    val partitionInfo = consumer.partitionsFor(topic)
-
-    val topicPartitions = Seq[Int]()
-    for (info: PartitionInfo <- partitionInfo) {
-      topicPartitions.addString(new StringBuilder(info.partition()))
+    private def getPartitions(topic: String, zkConnect: String): Seq[Int] = {
+//          val zkClient = new ZkClient(zkConnect, 6000, 6000, SerializableSerializer)
+      val zkUtils = ZkUtils.apply(zkConnect, 6000, 6000, JaasUtils.isZkSecurityEnabled())
+      try {
+        zkUtils.getPartitionsForTopics(Seq(topic)).flatMap(_._2).toSeq
+      } finally {
+        zkUtils.close()
+      }
     }
 
-    topicPartitions
-  }
-
+//  private val CLIENT_ID = "metrics_reader"
+//
+//  private val props = new Properties()
+//  props.put("key.deserializer", classOf[StringDeserializer])
+//  props.put("value.deserializer", classOf[StringDeserializer])
+//  props.put("group.id", CLIENT_ID)
+//  props.put("bootstrap.servers", bootstrapServers)
+//  props.put("enable.auto.commit", (true: java.lang.Boolean))
+//  props.put("auto.offset.reset", "latest")
+//
+//  private def getPartitions(topic: String): Seq[Int] = {
+//    import scala.collection.JavaConversions._
+//    val consumer = new KafkaConsumer[String, String](props);
+//    val partitionInfo = consumer.partitionsFor(topic)
+//
+//    val topicPartitions = Seq[Int]()
+//    for (info: PartitionInfo <- partitionInfo) {
+//      topicPartitions.addString(new StringBuilder(info.partition()))
+//    }
+//
+//    topicPartitions
+//  }
 
   private def report(minTime: Long, maxTime: Long, count: Long): Unit = {
     val outputFile = new File(outputDir, metricsTopic + ".csv")

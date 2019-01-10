@@ -180,6 +180,7 @@ HiBenchEnvPropMapping=dict(
     COMMON_JAR="hibench.common.jar",
 
     # prepare
+    STREAMING_BOOTSTRAP_SERVERS="hibench.streambench.kafka.brokerList",
     STREAMING_TOPIC_NAME="hibench.streambench.kafka.topic",
     STREAMING_KAFKA_HOME="hibench.streambench.kafka.home",
     STREAMING_ZKADDR="hibench.streambench.zkHost",

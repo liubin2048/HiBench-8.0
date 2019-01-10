@@ -48,6 +48,7 @@ class KafkaConsumerOwn(bootstrapServers: String, topic: String, partition: Int) 
   val tp = new TopicPartition(topic, partition)
   private val earliestOffset = consumer.beginningOffsets(util.Arrays.asList(tp)).get(tp)
 
+
 //    .earliestOrLatestOffset(TopicAndPartition(topic, partition), OffsetRequest.EarliestTime, -1)
   private var nextOffset: Long = earliestOffset
 

@@ -18,16 +18,21 @@ package com.intel.hibench.common.streaming.metrics
 
 object MetricsReader extends App {
 
-  if (args.length < 5) {
-    System.err.println("args: <bootstrapServers> <topic> <outputDir> <sampleNumber> <threadNumber> need to be specified!")
+//  if (args.length < 5) {
+//    System.err.println("args: <bootstrapServers> <topic> <outputDir> <sampleNumber> <threadNumber> need to be specified!")
+//    System.exit(1)
+//  }
+  if (args.length < 6) {
+    System.err.println("args: <zkConnect> <bootstrapServers> <topic> <outputDir> <sampleNumber> <threadNumber> need to be specified!")
     System.exit(1)
   }
 
-  val bootstrapServers = args(0)
-  val topic = args(1)
-  val outputDir = args(2)
-  val sampleNum = args(3).toInt
-  val threadNum = args(4).toInt
-  val latencyCollector = new KafkaCollector(bootstrapServers, topic, outputDir, sampleNum, threadNum)
+  val zkConnect = args(0)
+  val bootstrapServers = args(1)
+  val topic = args(2)
+  val outputDir = args(3)
+  val sampleNum = args(4).toInt
+  val threadNum = args(5).toInt
+  val latencyCollector = new KafkaCollector(zkConnect,bootstrapServers, topic, outputDir, sampleNum, threadNum)
   latencyCollector.start()
 }
