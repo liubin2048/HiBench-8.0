@@ -49,10 +49,6 @@
       <version>${kafkaClient.version}</version>
       <exclusions>
         <exclusion>
-          <groupId>org.slf4j</groupId>
-          <artifactId>slf4j-api</artifactId>
-        </exclusion>
-        <exclusion>
           <groupId>org.scala-lang</groupId>
           <artifactId>scala-library</artifactId>
         </exclusion>
