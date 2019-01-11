@@ -33,6 +33,13 @@ object MetricsReader extends App {
   val outputDir = args(3)
   val sampleNum = args(4).toInt
   val threadNum = args(5).toInt
+
+//  val zkConnect = "hadoop001:2181,hadoop002:2181,hadoop003:2181/kafka011"
+//  val bootstrapServers = "hadoop001:9092,hadoop002:9092,hadoop003:9092"
+//  val topic = "SPARK_wordcount_2_1000_50_1547120909384"
+//  val outputDir = "D:/"
+//  val sampleNum = 5000000
+//  val threadNum = 20
   val latencyCollector = new KafkaCollector(zkConnect,bootstrapServers, topic, outputDir, sampleNum, threadNum)
   latencyCollector.start()
 }

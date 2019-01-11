@@ -19,17 +19,9 @@ package com.intel.hibench.common.streaming.metrics
 import java.util
 import java.util.{Collections, Properties}
 
-import kafka.api.{FetchRequestBuilder, OffsetRequest}
-import kafka.common.ErrorMapping._
-import kafka.common.TopicAndPartition
-import kafka.consumer.{ConsumerConfig, SimpleConsumer}
-import kafka.message.MessageAndOffset
-import kafka.utils.ZkUtils
-import org.apache.kafka.clients.admin.KafkaAdminClient
 import org.apache.kafka.clients.consumer.{ConsumerRecord, KafkaConsumer}
 import org.apache.kafka.common.TopicPartition
 import org.apache.kafka.common.serialization.StringDeserializer
-import org.apache.kafka.common.utils.Utils
 
 class KafkaConsumerOwn(bootstrapServers: String, topic: String, partition: Int) {
 
@@ -41,18 +33,19 @@ class KafkaConsumerOwn(bootstrapServers: String, topic: String, partition: Int) 
   props.put("group.id", CLIENT_ID)
   props.put("bootstrap.servers", bootstrapServers)
   props.put("enable.auto.commit", (true: java.lang.Boolean))
-  props.put("auto.offset.reset", "latest")
+  props.put("auto.offset.reset", "earliest")
 
-  private val consumer = createConsumer
+//  private val earliestOffset = consumer
+//    .earliestOrLatestOffset(TopicAndPartition(topic, partition), OffsetRequest.EarliestTime, -1)
+//  private var nextOffset: Long = earliestOffset
+//  private var iterator: Iterator[MessageAndOffset] = getIterator(nextOffset)
+
 
   val tp = new TopicPartition(topic, partition)
+  private val consumer = createConsumer(tp)
+
   private val earliestOffset = consumer.beginningOffsets(util.Arrays.asList(tp)).get(tp)
-
-
-//    .earliestOrLatestOffset(TopicAndPartition(topic, partition), OffsetRequest.EarliestTime, -1)
   private var nextOffset: Long = earliestOffset
-
-//  private var iterator: Iterator[MessageAndOffset] = getIterator(nextOffset)
   private var iterator: util.Iterator[ConsumerRecord[String, String]] = getIterator(nextOffset)
 
   def next(): Array[Byte] = {
@@ -102,9 +95,10 @@ class KafkaConsumerOwn(bootstrapServers: String, topic: String, partition: Int) 
     consumer.close()
   }
 
-  private def createConsumer: KafkaConsumer[String, String] = {
+  private def createConsumer(tp: TopicPartition): KafkaConsumer[String, String] = {
     val kafkaComsumer = new KafkaConsumer[String, String](props)
-    kafkaComsumer.subscribe(Collections.singleton(topic))
+    kafkaComsumer.assign(Collections.singleton(tp))
+//    kafkaComsumer.subscribe(Collections.singleton(topic))
     kafkaComsumer
   }
 
