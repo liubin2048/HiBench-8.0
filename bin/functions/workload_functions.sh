@@ -245,10 +245,26 @@ function run_gearpump_app(){
     execute_withlog $CMD
 }
 
+#function run_flink_job(){
+#    CMD="${FLINK_HOME}/bin/flink run -p ${STREAMBENCH_FLINK_PARALLELISM} -m ${HIBENCH_FLINK_MASTER} $@ ${STREAMBENCH_FLINK_JAR} ${SPARKBENCH_PROPERTIES_FILES}"
+#    echo -e "${BGreen}Submit Flink Job: ${Green}$CMD${Color_Off}"
+#    execute_withlog $CMD
+#}
+
 function run_flink_job(){
     CMD="${FLINK_HOME}/bin/flink run -p ${STREAMBENCH_FLINK_PARALLELISM} -m ${HIBENCH_FLINK_MASTER} $@ ${STREAMBENCH_FLINK_JAR} ${SPARKBENCH_PROPERTIES_FILES}"
     echo -e "${BGreen}Submit Flink Job: ${Green}$CMD${Color_Off}"
+    MONITOR_PID=`start_monitor`
     execute_withlog $CMD
+    result=$?
+    stop_monitor ${MONITOR_PID}
+    if [ $result -ne 0 ]
+    then
+        echo -e "${BRed}ERROR${Color_Off}: Flink job ${BYellow}${CLS}${Color_Off} failed to run successfully."
+        echo -e "${BBlue}Hint${Color_Off}: You can goto ${BYellow}${WORKLOAD_RESULT_FOLDER}/bench.log${Color_Off} to check for detailed log.\nOpening log tail for you:\n"
+        tail ${WORKLOAD_RESULT_FOLDER}/bench.log
+        exit $result
+    fi
 }
 
 function run_hadoop_job(){
