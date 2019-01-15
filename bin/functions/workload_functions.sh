@@ -78,6 +78,7 @@ function get_field_name() {	# print report column header
     printf "${REPORT_COLUMN_FORMATS}" Type Date Time Input_data_size "Duration(s)" "Throughput(bytes/s)" Throughput/node 
 }
 
+
 function gen_report() {		# dump the result to report file
     assert ${HIBENCH_CUR_WORKLOAD_NAME} "HIBENCH_CUR_WORKLOAD_NAME not specified."
     local start=$1
