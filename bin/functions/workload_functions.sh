@@ -253,6 +253,8 @@ function run_gearpump_app(){
 #}
 
 function run_flink_job(){
+    CLS=$1
+    export_withlog SPARKBENCH_PROPERTIES_FILES
     CMD="${FLINK_HOME}/bin/flink run -p ${STREAMBENCH_FLINK_PARALLELISM} -m ${HIBENCH_FLINK_MASTER} $@ ${STREAMBENCH_FLINK_JAR} ${SPARKBENCH_PROPERTIES_FILES}"
     echo -e "${BGreen}Submit Flink Job: ${Green}$CMD${Color_Off}"
     MONITOR_PID=`start_monitor`
