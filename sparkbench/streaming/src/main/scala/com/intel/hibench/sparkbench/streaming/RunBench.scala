@@ -22,13 +22,12 @@ import com.intel.hibench.common.streaming.metrics.MetricsUtil
 import com.intel.hibench.common.streaming.{ConfigLoader, Platform, StreamBenchConfig, TestCase}
 import com.intel.hibench.sparkbench.streaming.application._
 import com.intel.hibench.sparkbench.streaming.util.SparkBenchConfig
-import kafka.serializer.StringDecoder
-import org.apache.kafka.clients.consumer.{ConsumerRecord, ConsumerRecords}
+import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.apache.spark.SparkConf
-import org.apache.spark.streaming.dstream.{DStream, InputDStream}
-import org.apache.spark.streaming.kafka010._
-import org.apache.spark.streaming.kafka010.LocationStrategies.PreferConsistent
+import org.apache.spark.streaming.dstream.DStream
 import org.apache.spark.streaming.kafka010.ConsumerStrategies.Subscribe
+import org.apache.spark.streaming.kafka010.LocationStrategies.PreferConsistent
+import org.apache.spark.streaming.kafka010._
 import org.apache.spark.streaming.{Milliseconds, StreamingContext}
 
 /**
