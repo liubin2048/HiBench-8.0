@@ -2,8 +2,10 @@
 ## The bigdata micro benchmark suite ##
 
 
+* Current version: 7.0
+* Homepage(history): https://github.com/intel-hadoop/HiBench
 * Current version: 7.0-liubin
-* Homepage: https://github.com/intel-hadoop/HiBench
+* Homepage(new): https://github.com/liubin2048/hibench
 * Contents:
   1. Overview
   2. Getting Started
