@@ -1,16 +1,26 @@
-# HiBench Suite [![Build Status](https://travis-ci.org/intel-hadoop/HiBench.svg?branch=master)](https://travis-ci.org/intel-hadoop/HiBench)
+# HiBench Suite 
 ## The bigdata micro benchmark suite ##
 
 
-* Current version: 7.0-liubin
-* Homepage: https://github.com/intel-hadoop/HiBench
+* Current version: 7.0
+* Homepage(history): https://github.com/intel-hadoop/HiBench
+* Current version: 8.0
+* Homepage(new): https://github.com/liubin2048/hibench
 * Contents:
-  1. Overview
-  2. Getting Started
-  3. Workloads
-  4. Supported Releases
+  1. Supported Releases
+  2. Overview
+  3. Getting Started
+  4. Workloads
 
 ---
+### Supported Hadoop/Spark/Flink/Storm/Gearpump releases ###
+* Hadoop: Apache Hadoop 2.9.1
+* Spark: Spark 2.4.0
+* Flink: 1.7.1
+* Storm: 1.0.1(未测试)
+* Gearpump: 0.8.1(未测试)
+* Kafka: 0.11.0.3
+
 ### OVERVIEW ###
 
 HiBench is a big data benchmark suite that helps evaluate different big data frameworks in terms of speed, throughput and system resource utilizations. It contains a set of Hadoop, Spark and streaming workloads, including Sort, WordCount, TeraSort, Sleep, SQL, PageRank, Nutch indexing, Bayes, Kmeans, NWeight and enhanced DFSIO, etc. It also contains several streaming workloads for Spark Streaming, Flink, Storm and Gearpump.
@@ -130,16 +140,6 @@ There are totally 19 workloads in HiBench. The workloads are divided into 6 cate
 4. Fixwindow (fixwindow)
 
     The workloads performs a window based aggregation. It tests the performance of window operation in the streaming frameworks.
-  
-    
-### Supported Hadoop/Spark/Flink/Storm/Gearpump releases: ###
-
-  - Hadoop: Apache Hadoop 2.9.1
-  - Spark: Spark 2.4.0
-  - Flink: 1.7.1
-  - Storm: 1.0.1(未测试)
-  - Gearpump: 0.8.1(未测试)
-  - Kafka: 0.11.0.3
 
 ---
 
