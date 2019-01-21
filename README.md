@@ -14,12 +14,12 @@
 
 ---
 ### Supported Hadoop/Spark/Flink/Storm/Gearpump releases ###
-Hadoop: Apache Hadoop 2.9.1
-Spark: Spark 2.4.0
-Flink: 1.7.1
-Storm: 1.0.1(未测试)
-Gearpump: 0.8.1(未测试)
-Kafka: 0.11.0.3
+* Hadoop: Apache Hadoop 2.9.1
+* Spark: Spark 2.4.0
+* Flink: 1.7.1
+* Storm: 1.0.1(未测试)
+* Gearpump: 0.8.1(未测试)
+* Kafka: 0.11.0.3
 
 ### OVERVIEW ###
 
