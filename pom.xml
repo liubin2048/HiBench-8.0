@@ -163,12 +163,12 @@
             </modules>
         </profile>
 
-        <profile>
-            <id>gearpumpbench</id>
-            <modules>
-                <module>gearpumpbench</module>
-            </modules>
-        </profile>
+        <!--<profile>-->
+            <!--<id>gearpumpbench</id>-->
+            <!--<modules>-->
+                <!--<module>gearpumpbench</module>-->
+            <!--</modules>-->
+        <!--</profile>-->
 
         <profile>
             <id>hadoopbench</id>
@@ -189,7 +189,7 @@
             <modules>
                 <module>sparkbench</module>
                 <module>flinkbench</module>
-                <module>gearpumpbench</module>
+                <!--<module>gearpumpbench</module>-->
                 <module>hadoopbench</module>
                 <!--<module>stormbench</module>-->
             </modules>
