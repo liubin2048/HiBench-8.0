@@ -1,4 +1,4 @@
-# HiBench Suite [![Build Status](https://travis-ci.org/intel-hadoop/HiBench.svg?branch=master)](https://travis-ci.org/intel-hadoop/HiBench)
+# HiBench Suite 
 ## The bigdata micro benchmark suite ##
 
 
@@ -20,6 +20,7 @@ Flink: 1.7.1
 Storm: 1.0.1(未测试)
 Gearpump: 0.8.1(未测试)
 Kafka: 0.11.0.3
+
 ### OVERVIEW ###
 
 HiBench is a big data benchmark suite that helps evaluate different big data frameworks in terms of speed, throughput and system resource utilizations. It contains a set of Hadoop, Spark and streaming workloads, including Sort, WordCount, TeraSort, Sleep, SQL, PageRank, Nutch indexing, Bayes, Kmeans, NWeight and enhanced DFSIO, etc. It also contains several streaming workloads for Spark Streaming, Flink, Storm and Gearpump.
