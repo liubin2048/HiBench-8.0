@@ -4,7 +4,7 @@
 
 * Current version: 7.0
 * Homepage(history): https://github.com/intel-hadoop/HiBench
-* Current version: 7.0-liubin
+* Current version: 8.0
 * Homepage(new): https://github.com/liubin2048/hibench
 * Contents:
   1. Supported Releases
