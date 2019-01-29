@@ -91,7 +91,7 @@ object RunBench {
     // defind streaming context
     val conf = new SparkConf().setMaster(config.master).setAppName(config.benchName)
     val ssc = new StreamingContext(conf, Milliseconds(config.batchInterval))
-    ssc.checkpoint(config.checkpointPath)
+//    ssc.checkpoint(config.checkpointPath)
 
     if (!config.debugMode) {
       ssc.sparkContext.setLogLevel("ERROR")

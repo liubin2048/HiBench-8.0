@@ -45,16 +45,30 @@ class WordCount() extends BenchBase {
       (ip, one.get._1)
     }
 
+//    取消spark checkpoint机制（有状态transformation）
+//    val wordCount = parsedLine.mapWithState(StateSpec.function(mappingFunc))
+//
+//    wordCount.foreachRDD(rdd => rdd.foreachPartition(partLines => {
+//      val reporter = new KafkaReporter(reportTopic, brokerList)
+//      partLines.foreach { case (word, inTime) =>
+//        val outTime = System.currentTimeMillis()
+//        reporter.report(inTime, outTime)
+//        if (config.debugMode) println(word + ": " + inTime + ", " + outTime )
+//      }
+//    }))
 
-    val wordCount = parsedLine.mapWithState(StateSpec.function(mappingFunc))
+    val wordCount = parsedLine
 
     wordCount.foreachRDD(rdd => rdd.foreachPartition(partLines => {
       val reporter = new KafkaReporter(reportTopic, brokerList)
-      partLines.foreach { case (word, inTime) =>
-        val outTime = System.currentTimeMillis()
-        reporter.report(inTime, outTime)
-        if (config.debugMode) println(word + ": " + inTime + ", " + outTime )
-      }
+      partLines.map(e=>(e._1,e._2._1)).
+        foreach { case (word, inTime) =>
+          val outTime = System.currentTimeMillis()
+          reporter.report(inTime, outTime)
+          if (config.debugMode) println(word + ": " + inTime + ", " + outTime )
+        }
     }))
+
+
   }
 }
