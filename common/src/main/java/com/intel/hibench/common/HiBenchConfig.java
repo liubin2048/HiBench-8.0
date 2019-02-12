@@ -40,4 +40,7 @@ public class HiBenchConfig {
   public static String YARN_EXECUTOR_NUMBER = "hibench.yarn.executor.num";
 
   public static String YARN_EXECUTOR_CORES = "hibench.yarn.executor.cores";
+
+//  add:repartition number
+  public static String SPARK_REPARTITION_NUMBER = "hibench.spark.repartition.num";
 }
