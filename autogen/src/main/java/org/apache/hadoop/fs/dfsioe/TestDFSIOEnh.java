@@ -967,8 +967,11 @@ public class TestDFSIOEnh extends Configured implements Tool {
 			 e.printStackTrace();
 		 } finally {
 			 fs.delete(DfsioeConfig.getInstance().getReportTmp(fsConfig), true);
-			 FileUtil.copyMerge(fs, DfsioeConfig.getInstance().getReportDir(fsConfig), fs, DfsioeConfig.getInstance().getReportTmp(fsConfig), false, fsConfig, null);
-			 LOG.info("remote report file " + DfsioeConfig.getInstance().getReportTmp(fsConfig) + " merged.");
+
+			 // 3.0
+//			 FileUtil.copyMerge(fs, DfsioeConfig.getInstance().getReportDir(fsConfig), fs, DfsioeConfig.getInstance().getReportTmp(fsConfig), false, fsConfig, null);
+             FileUtil.copy(fs, DfsioeConfig.getInstance().getReportDir(fsConfig), fs, DfsioeConfig.getInstance().getReportTmp(fsConfig), false, fsConfig);
+             LOG.info("remote report file " + DfsioeConfig.getInstance().getReportTmp(fsConfig) + " merged.");
 
 //             BufferedReader lines = new BufferedReader(new InputStreamReader(new DataInputStream(fs.open(DfsioeConfig.getInstance().getReportTmp(fsConfig)))));
 
