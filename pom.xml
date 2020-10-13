@@ -50,7 +50,7 @@
         <build-helper-maven-plugin.version>1.9.1</build-helper-maven-plugin.version>
         <download-maven-plugin.version>1.2.0</download-maven-plugin.version>
 
-        <junit.version>4.11</junit.version>
+        <junit.version>4.13.1</junit.version>
         <jetty.version>8.1.14.v20131031</jetty.version>
         <slf4j.version>1.7.5</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
